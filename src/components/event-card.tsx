@@ -40,7 +40,7 @@ export function EventCard({
   return (
     <Card
       className={cn(
-        "flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100",
+        "flex flex-col overflow-hidden border border-gray-200 dark:border-gray-700 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 ease-in-out",
         className
       )}
     >
@@ -58,13 +58,13 @@ export function EventCard({
       <CardHeader className="p-4">
         <div className="space-y-2">
           <CardTitle className="text-lg font-semibold">{title}</CardTitle>
-          <time className="block text-sm text-gray-500 dark:text-gray-400">{dates}</time>
+          <time className="block text-sm text-gray-500 dark:text-gray-200">{dates}</time>
           {link && (
             <div className="hidden text-sm text-blue-500 underline print:block">
               {link.replace("https://", "").replace("www.", "").replace("/", "")}
             </div>
           )}
-          <p className="text-sm text-gray-700 dark:text-gray-300">{description}</p>
+          <p className="text-sm text-gray-700 dark:text-white/50">{description}</p>
         </div>
       </CardHeader>
       <CardContent className="p-4 mt-auto">
@@ -72,7 +72,7 @@ export function EventCard({
           <div className="mt-2 flex flex-wrap gap-2">
             {tags.map((tag) => (
               <Badge
-                className="px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100"
+                className="px-2 py-1 text-xs"
                 variant="secondary"
                 key={tag}
               >
@@ -87,7 +87,7 @@ export function EventCard({
           <div className="flex flex-row flex-wrap gap-2">
             {links.map((link, idx) => (
               <Link href={link.href} key={idx} target="_blank" rel="noopener noreferrer">
-                <Badge className="flex items-center gap-1 px-2 py-1 text-xs bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                <Badge className="flex items-center gap-1 px-2 py-1 text-xs">
                   {link.icon}
                   {link.type}
                 </Badge>
