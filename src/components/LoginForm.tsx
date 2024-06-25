@@ -26,20 +26,24 @@ export function LoginForm() {
       const email = formData.get("email");
       const password = formData.get("password");
 
-      const response = await api.post("/login", {
+      console.log(email, password);
+
+      const response = await api.post("/auth/login", {
         email,
         password,
       });
 
       if (response.status === 200) {
-        router.replace("/");
+        router.replace("/event");
+      } else {
+        alert("An error occurred");
       }
     } catch (error) {
       console.error(error);
     }
   }
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -53,13 +57,14 @@ export function LoginForm() {
             <Input
               id="email"
               type="email"
+              name="email"
               placeholder="m@example.com"
               required
             />
           </div>
           <div className="grid gap-2">
             <Label htmlFor="password">Password</Label>
-            <Input id="password" type="password" required />
+            <Input name="password" id="password" type="password" required />
           </div>
           <div>
             <Button className="w-full">Sign in</Button>
