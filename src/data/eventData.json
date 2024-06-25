@@ -1,0 +1,45 @@
+[
+    {
+      "title": "Event 1",
+      "href": "/events/event-1",
+      "description": "This is the first event. It is a workshop on AI and Machine Learning. It will be held from June 1st to June 5th, 2024. You can find more information on the official site. You can also add this event to your calendar.", 
+      "dates": "2024-06-01 to 2024-06-05",
+      "tags": ["Workshop", "AI", "Machine Learning"],
+      "link": "https://example.com/event-1",
+      "image": "https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg",
+      "links": [
+        {
+          "icon": "🔗",
+          "type": "Official Site",
+          "href": "https://example.com/event-1"
+        },
+        {
+          "icon": "📅",
+          "type": "Calendar",
+          "href": "https://calendar.google.com/event-1"
+        }
+      ]
+    },
+    {
+      "title": "Event 2",
+      "href": "/events/event-2",
+      "description": "This is the second event. It is a conference on tech and networking. It will be held from July 10th to July 15th, 2024. You can find more information on the official site. You can also add this event to your calendar.",
+      "dates": "2024-07-10 to 2024-07-15",
+      "tags": ["Conference", "Tech", "Networking"],
+      "link": "https://example.com/event-2",
+      "image": "https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg",
+      "links": [
+        {
+          "icon": "🔗",
+          "type": "Official Site",
+          "href": "https://example.com/event-2"
+        },
+        {
+          "icon": "📅",
+          "type": "Calendar",
+          "href": "https://calendar.google.com/event-2"
+        }
+      ]
+    }
+  ]
+  
