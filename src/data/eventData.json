@@ -43,8 +43,8 @@
     },
     {
       "title": "Event 3",
-      "href": "/event/event-2",
-      "description": "This is the second event. It is a conference on tech and networking. It will be held from July 10th to July 15th, 2024. You can find more information on the official site. You can also add this event to your calendar.",
+      "href": "/event/event-3",
+      "description": "This is the third event. It is a conference on tech and networking. It will be held from July 10th to July 15th, 2024. You can find more information on the official site. You can also add this event to your calendar.",
       "dates": "2024-07-10 to 2024-07-15",
       "tags": ["Conference", "Tech", "Networking"],
       "link": "https://example.com/event-2",
@@ -64,8 +64,8 @@
     }, 
     {
       "title": "Event 4",
-      "href": "/event/event-2",
-      "description": "This is the second event. It is a conference on tech and networking. It will be held from July 10th to July 15th, 2024. You can find more information on the official site. You can also add this event to your calendar.",
+      "href": "/event/event-4",
+      "description": "This is the fourth event. It is a conference on tech and networking. It will be held from July 10th to July 15th, 2024. You can find more information on the official site. You can also add this event to your calendar.",
       "dates": "2024-07-10 to 2024-07-15",
       "tags": ["Conference", "Tech", "Networking"],
       "link": "https://example.com/event-2",

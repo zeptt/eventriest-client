@@ -28,7 +28,7 @@ export default function EventDetails() {
             <div className="relative h-96">
               <Image
                 alt="Event image"
-                className="object-cover w-full rounded-lgs h-full"
+                className="object-cover w-full rounded-lg h-full"
                 src="https://images.pexels.com/photos/620337/pexels-photo-620337.jpeg"
                 layout="fill"
               />
