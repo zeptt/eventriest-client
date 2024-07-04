@@ -1,12 +1,54 @@
 import React, { } from 'react';
 import { EventCard } from '@/components/event-card';
-import eventData from '@/data/eventData.json';
 import { Input } from '@/components/ui/input';
 import { ListFilter, Search } from 'lucide-react';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
+import api from '@/lib/api';
+import { response } from '@/lib/response';
+import { ClientError } from '@/components/client-error';
 
-const EventsPage = () => {
+export interface Event {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  visibility: string;
+  location: string;
+  link: string;
+  credentials: string;
+  startTime: string;
+  endTime: string;
+  createdAt: string;
+  updatedAt: string;
+  organizerId: number;
+  organizer: any;
+  attendees: any[];
+  tips: any[];
+  announcements: any[];
+  marketing: any[];
+  tickets: any[];
+  Subscription: any[];
+  TicketPurchase: any[];
+}
+
+const getEvents = async () => {
+  try {
+    const data = await api.get('/event');
+    return response<Event[]>(data.data, true);
+  } catch (error: any) {
+    return response<Event[]>(error?.response.data, false);
+  }
+}
+
+const EventsPage = async () => {
+  const events = await getEvents();
+
+  if(!events.success || !events.data) {
+    return <ClientError error={events.data?.message}/>;
+  }
+
+  console.log(events.data.data);
 
   return (
     <div className="container mx-auto py-8 px-4">
@@ -69,17 +111,17 @@ const EventsPage = () => {
         </div>
       </div>
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {eventData.map((event, index) => (
+        {events.data.data.map((event, index) => (
           <EventCard
             key={index}
             title={event.title}
-            href={event.href}
+            href={`/event/${event.id}`}
             description={event.description}
-            dates={event.dates}
-            tags={event.tags}
+            dates={event.startTime}
+            tags={[]}
             link={event.link}
             image={event.image}
-            links={event.links}
+            links={[]}
             className="event-card"
           />
         ))}

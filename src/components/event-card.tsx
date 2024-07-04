@@ -10,7 +10,7 @@ interface Props {
   href?: string;
   description: string;
   dates: string;
-  tags: readonly string[];
+  tags: string[];
   link?: string;
   image?: string;
   links?: readonly {

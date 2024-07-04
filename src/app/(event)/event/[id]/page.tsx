@@ -9,8 +9,33 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { response } from "@/lib/response";
+import { Event } from "../page";
+import api from "@/lib/api";
+import { ClientError } from "@/components/client-error";
 
-export default function EventDetails() {
+const getEvent = async (id: string) => {
+  try {
+    const data = await api.get(`/event/${id}`);
+    return response<Event[]>(data.data, true);
+  } catch (error: any) {
+    return response<Event[]>(error?.response.data, false);
+  }
+}
+
+export default async function EventDetails({params: {
+  id
+}}: {
+  params: {
+    id: string;
+  };
+}) {
+  const event = await getEvent(id);
+
+  if(!event.success || !event.data) {
+    return <ClientError error={event.data?.message}/>;
+  }
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
