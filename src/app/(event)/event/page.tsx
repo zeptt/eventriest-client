@@ -4,7 +4,7 @@ import { Input } from '@/components/ui/input';
 import { ListFilter, Search } from 'lucide-react';
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import api from '@/lib/api';
+import api, { cacheConfig } from '@/lib/api';
 import { response } from '@/lib/response';
 import { ClientError } from '@/components/client-error';
 
@@ -34,7 +34,11 @@ export interface Event {
 
 const getEvents = async () => {
   try {
-    const data = await api.get('/event');
+    const data = await api.get('/event', {
+      headers: {
+        ...cacheConfig(),
+      }
+    });
     return response<Event[]>(data.data, true);
   } catch (error: any) {
     return response<Event[]>(error?.response.data, false);
@@ -43,9 +47,10 @@ const getEvents = async () => {
 
 const EventsPage = async () => {
   const events = await getEvents();
+  console.log(events);
 
-  if(!events.success || !events.data) {
-    return <ClientError error={events.data?.message}/>;
+  if (!events.success || !events.data) {
+    return <ClientError error={events.data?.message} />;
   }
 
   console.log(events.data.data);
