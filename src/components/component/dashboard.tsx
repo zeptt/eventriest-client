@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -7,42 +5,37 @@ import {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter,
 } from "@/components/ui/card";
-import { FilePenLineIcon, Trash2Icon } from "lucide-react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import ViewMyEvents from "../view-my-events";
+import CreateEventCard from "../create-event-card";
+import ViewEventButton from "../view-event-button";
+import { ClientError } from "../client-error";
+import api from "@/lib/api";
+import { response } from "@/lib/response";
+import { Event } from "@/app/(event)/event/page";
 
-export function Dashboard() {
-  const router = useRouter();
+const getMyEvents = async () => {
+  try {
+    const data = await api.get("/event/my-events/", {});
+    return response<Event[]>(data.data, true);
+  } catch (error: any) {
+    return response<Event[]>(error?.response.data, false);
+  }
+};
 
-  const handleClick = () => {
-    router.push("/dashboard/my-events");
-  };
+export async function Dashboard() {
+  const events = await getMyEvents();
+  console.log(events);
+
+  if (!events.success || !events.data) {
+    return <ClientError error={events.data?.message} />;
+  }
 
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-1 py-8 px-4 sm:px-6 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Create Event</CardTitle>
-              <CardDescription>
-                Easily create and manage your events.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Button
-                onClick={() => {
-                  router.push("/dashboard/create");
-                }}
-                size="lg"
-                className="w-full"
-              >
-                Create Event
-              </Button>
-            </CardContent>
-          </Card>
+          <CreateEventCard />
           <Card>
             <CardHeader>
               <CardTitle>Marketing Tools</CardTitle>
@@ -81,45 +74,9 @@ export function Dashboard() {
           </Card>
         </div>
         <div className="mt-8">
-          <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-bold">Your Events</h2>
-            <Button variant="outline" size="sm" onClick={handleClick}>
-              View All
-            </Button>
-          </div>
+          <ViewEventButton />
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>Event Name</CardTitle>
-                <CardDescription>Event Date</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="text-lg font-medium">100</div>
-                    <div className="text-muted-foreground text-sm">
-                      Attendees
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-lg font-medium">$5,000</div>
-                    <div className="text-muted-foreground text-sm">Revenue</div>
-                  </div>
-                </div>
-              </CardContent>
-              <CardFooter>
-                <div className="flex items-center gap-2">
-                  <Button variant="ghost" size="icon">
-                    <FilePenLineIcon className="w-5 h-5" />
-                    <span className="sr-only">Edit</span>
-                  </Button>
-                  <Button variant="ghost" size="icon">
-                    <Trash2Icon className="w-5 h-5" />
-                    <span className="sr-only">Delete</span>
-                  </Button>
-                </div>
-              </CardFooter>
-            </Card>
+            <ViewMyEvents events={events.data.data} />
           </div>
         </div>
       </main>
