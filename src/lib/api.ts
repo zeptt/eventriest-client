@@ -6,4 +6,10 @@ const api = axios.create({
   withCredentials: true,
 });
 
+export const cacheConfig = (sec: number = 15) => {
+  return {
+    "X-Cache": `${sec}`,
+  };
+};
+
 export default api;

@@ -97,11 +97,11 @@ export function AuthNavbar() {
             <Rocket />
           </Link>
           <NavigationMenuItem>
-            <NavigationMenuTrigger>Pricing</NavigationMenuTrigger>
+            <NavigationMenuTrigger>Events</NavigationMenuTrigger>
             <NavigationMenuContent>
               <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
-                <ListItem href="/docs" title="Introduction">
-                  Re-usable components built using Radix UI and Tailwind CSS.
+                <ListItem href="/docs" title="All Events">
+                  View All Events
                 </ListItem>
                 <ListItem href="/docs/installation" title="Installation">
                   How to install dependencies and structure your app.

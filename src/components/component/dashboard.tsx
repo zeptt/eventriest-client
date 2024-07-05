@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
-import { FilePenLineIcon, Trash2Icon } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardDescription,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { FilePenLineIcon, Trash2Icon } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export function Dashboard() {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push('/dashboard/my-events');
+    router.push("/dashboard/my-events");
   };
 
   return (
@@ -19,18 +27,28 @@ export function Dashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Create Event</CardTitle>
-              <CardDescription>Easily create and manage your events.</CardDescription>
+              <CardDescription>
+                Easily create and manage your events.
+              </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button size="lg" className="w-full">
-                Create New Event
+              <Button
+                onClick={() => {
+                  router.push("/dashboard/create");
+                }}
+                size="lg"
+                className="w-full"
+              >
+                Create Event
               </Button>
             </CardContent>
           </Card>
           <Card>
             <CardHeader>
               <CardTitle>Marketing Tools</CardTitle>
-              <CardDescription>Promote your events and reach more attendees.</CardDescription>
+              <CardDescription>
+                Promote your events and reach more attendees.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4">
@@ -46,7 +64,9 @@ export function Dashboard() {
           <Card>
             <CardHeader>
               <CardTitle>Analytics</CardTitle>
-              <CardDescription>Gain insights into your event performance.</CardDescription>
+              <CardDescription>
+                Gain insights into your event performance.
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="grid gap-4">
@@ -77,7 +97,9 @@ export function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <div className="text-lg font-medium">100</div>
-                    <div className="text-muted-foreground text-sm">Attendees</div>
+                    <div className="text-muted-foreground text-sm">
+                      Attendees
+                    </div>
                   </div>
                   <div>
                     <div className="text-lg font-medium">$5,000</div>
@@ -102,5 +124,5 @@ export function Dashboard() {
         </div>
       </main>
     </div>
-  )
+  );
 }
