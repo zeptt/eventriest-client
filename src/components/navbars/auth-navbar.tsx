@@ -16,6 +16,7 @@ import { Button } from "../ui/button"
 import { SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet"
 import { Rocket } from "lucide-react"
 import { Profile } from "../Profile"
+import DashboardButton from "../dashboard-button"
 
 const components: { title: string; href: string; description: string }[] = [
   {
@@ -62,8 +63,6 @@ const components: { title: string; href: string; description: string }[] = [
 ]
 
 export function AuthNavbar() {
-  // const { isLoaded, userId, sessionId, getToken } = useAuth();
-
   return (
     <div className="flex min-w-full justify-between p-2 border-b z-10">
       <Dialog>
@@ -132,6 +131,7 @@ export function AuthNavbar() {
         </NavigationMenuList>
       </NavigationMenu>
       <div className="flex items-center gap-3">
+        <DashboardButton />
         {/* {userId && <Profile />} */}
         {<Profile />}
         <ModeToggle />
