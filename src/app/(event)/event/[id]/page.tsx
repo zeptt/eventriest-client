@@ -17,9 +17,9 @@ import { ClientError } from "@/components/client-error";
 const getEvent = async (id: string) => {
   try {
     const data = await api.get(`/event/${id}`);
-    return response<Event[]>(data.data, true);
+    return response<Event>(data.data, true);
   } catch (error: any) {
-    return response<Event[]>(error?.response.data, false);
+    return response<Event>(error?.response.data, false);
   }
 }
 
@@ -71,13 +71,11 @@ export default async function EventDetails({params: {
                     <div className="grid gap-6">
                       <div className="grid gap-3">
                         <span className="font-semibold">Event Name:</span>{" "}
-                        Sample Event Name
+                        {event.data.data.title}
                       </div>
                       <div className="grid gap-3">
                         <span className="font-semibold">Description:</span>{" "}
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        Nullam auctor, nisl nec ultricies ultricies, nunc nisl
-                        ultricies nunc, nec ultricies nunc nisl nec nunc.
+                        {event.data.data.description}
                       </div>
                     </div>
                   </CardContent>
@@ -89,10 +87,10 @@ export default async function EventDetails({params: {
                   <CardContent>
                     <div className="grid gap-6">
                       <div className="grid gap-3">
-                        <span className="font-semibold">Date:</span> 2024-07-04
+                        <span className="font-semibold">Date:</span> {event.data.data.startTime.split("T")[0]}
                       </div>
                       <div className="grid gap-3">
-                        <span className="font-semibold">Time:</span> 18:00
+                        <span className="font-semibold">Time:</span> {event.data.data.endTime.split("T")[1]}
                       </div>
                     </div>
                   </CardContent>
@@ -105,7 +103,7 @@ export default async function EventDetails({params: {
                     <div className="grid gap-6">
                       <div className="grid gap-3">
                         <span className="font-semibold">Venue Name:</span>{" "}
-                        Sample Venue
+                        {event.data.data.location}
                       </div>
                       <div className="grid gap-3">
                         <span className="font-semibold">Address:</span> 123
