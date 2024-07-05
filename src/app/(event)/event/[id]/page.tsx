@@ -11,12 +11,16 @@ import {
 import { Button } from "@/components/ui/button";
 import { response } from "@/lib/response";
 import { Event } from "../page";
-import api from "@/lib/api";
+import api, { cacheConfig } from "@/lib/api";
 import { ClientError } from "@/components/client-error";
 
 const getEvent = async (id: string) => {
   try {
-    const data = await api.get(`/event/${id}`);
+    const data = await api.get(`/event/${id}`, {
+      headers: {
+        ...cacheConfig(),
+      }
+    });
     return response<Event>(data.data, true);
   } catch (error: any) {
     return response<Event>(error?.response.data, false);
@@ -31,6 +35,7 @@ export default async function EventDetails({params: {
   };
 }) {
   const event = await getEvent(id);
+  console.log(event);
 
   if(!event.success || !event.data) {
     return <ClientError error={event.data?.message}/>;
@@ -47,7 +52,7 @@ export default async function EventDetails({params: {
                 <span>Back</span>
               </Link>
               <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
-                Event Details
+                  {event.data.data.title}
               </h1>
             </div>
             <div className="relative h-96">
